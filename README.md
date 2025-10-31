@@ -215,6 +215,22 @@ In GraphQL Playground, you can add it in the HTTP Headers section:
 - `npm run typecheck` - Check TypeScript types
 - `npm run init:admin` - Initialize admin account
 
+## CI/CD
+
+المشروع يستخدم GitHub Actions للـ CI/CD:
+
+### اختبار محلي:
+```bash
+npm run typecheck  # فحص الأخطاء
+npm run build      # بناء المشروع
+```
+
+### على GitHub:
+- عند **Push** أو **Pull Request**: يتم تشغيل CI/CD تلقائياً
+- اذهب إلى تبويب **Actions** على GitHub لمشاهدة النتائج
+
+📖 راجع `TEST_CI_CD.md` للدليل الكامل
+
 ## Project Structure
 
 ```
