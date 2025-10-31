@@ -1,4 +1,14 @@
 import { mergeResolvers } from "@graphql-tools/merge";
-import { userResolvers } from "./userResolver";
+import { adminResolvers } from "./adminResolver";
+import { profileResolvers } from "./profileResolver";
+import { projectResolvers } from "./projectResolver";
+import { skillResolvers } from "./skillResolver";
+import { experienceResolvers } from "./experienceResolver";
 
-export const resolvers = mergeResolvers([userResolvers]);
+export const resolvers = mergeResolvers([
+  adminResolvers,
+  profileResolvers,
+  projectResolvers,
+  skillResolvers,
+  experienceResolvers
+]);

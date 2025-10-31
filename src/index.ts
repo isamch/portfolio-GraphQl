@@ -6,6 +6,7 @@ import { makeExecutableSchema } from "@graphql-tools/schema";
 import { typeDefs } from "./schema/index";
 import { resolvers } from "./resolvers/index";
 import { connectToDatabase } from "./config/db";
+import { getAdminFromToken, GraphQLContext } from "./middleware/auth";
 
 dotenv.config();
 
@@ -17,9 +18,19 @@ const schema = makeExecutableSchema({ typeDefs, resolvers });
 
 app.use(
   "/graphql",
-  graphqlHTTP({
-    schema,
-    graphiql: process.env.NODE_ENV !== "production"
+  graphqlHTTP((request) => {
+    const token = request.headers.authorization;
+    const adminId = getAdminFromToken(token);
+
+    const context: GraphQLContext = {
+      adminId: adminId || undefined
+    };
+
+    return {
+      schema,
+      context,
+      graphiql: process.env.NODE_ENV !== "production"
+    };
   })
 );
 
