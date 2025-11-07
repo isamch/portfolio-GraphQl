@@ -1,0 +1,603 @@
+
+{
+	"info": {
+		"_postman_id": "a8c2a0d3-1234-4e1a-8ef9-09ab2198b69f",
+		"name": "Portfolio API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Admin",
+			"item": [
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "mutation Login($email: String!, $password: String!) {\n  login(email: $email, password: $password) {\n    token\n    admin {\n      id\n      email\n    }\n  }\n}",
+								"variables": "{\n  \"email\": \"admin@portfolio.com\",\n  \"password\": \"admin123\"\n}"
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4000/graphql",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"graphql"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Profile",
+			"item": [
+				{
+					"name": "Get Profile",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "query GetProfile {\n  profile {\n    id\n    name\n    title\n    bio\n    email\n    phone\n    location\n    github\n    linkedin\n    twitter\n    website\n    avatar\n  }\n}",
+								"variables": "{}"
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4000/graphql",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"graphql"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Profile",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "YOUR_AUTH_TOKEN",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "mutation UpdateProfile($input: UpdateProfileInput!) {\n  updateProfile(input: $input) {\n    id\n    name\n    title\n    bio\n    email\n  }\n}",
+								"variables": "{\n  \"input\": {\n    \"name\": \"John Doe\",\n    \"title\": \"Full Stack Developer\",\n    \"bio\": \"A passionate developer with a love for creating amazing things.\",\n    \"email\": \"john.doe@example.com\"\n  }\n}"
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4000/graphql",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"graphql"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Experience",
+			"item": [
+				{
+					"name": "Get Experiences",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "query GetExperiences {\n  experiences {\n    id\n    title\n    company\n    startDate\n    endDate\n    current\n  }\n}",
+								"variables": "{}"
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4000/graphql",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"graphql"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Experience by ID",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "query GetExperience($id: ID!) {\n  experience(id: $id) {\n    id\n    title\n    company\n    description\n    technologies\n  }\n}",
+								"variables": "{\n  \"id\": \"YOUR_EXPERIENCE_ID\"\n}"
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4000/graphql",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"graphql"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Experience",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "YOUR_AUTH_TOKEN",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "mutation CreateExperience($input: CreateExperienceInput!) {\n  createExperience(input: $input) {\n    id\n    title\n    company\n  }\n}",
+								"variables": "{\n  \"input\": {\n    \"title\": \"Software Engineer\",\n    \"company\": \"Tech Corp\",\n    \"location\": \"San Francisco, CA\",\n    \"description\": \"Worked on the core platform team.\",\n    \"startDate\": \"2022-01-01\",\n    \"current\": true,\n    \"technologies\": [\"JavaScript\", \"React\", \"Node.js\"]\n  }\n}"
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4000/graphql",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"graphql"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Experience",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "YOUR_AUTH_TOKEN",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "mutation UpdateExperience($id: ID!, $input: UpdateExperienceInput!) {\n  updateExperience(id: $id, input: $input) {\n    id\n    title\n    company\n    description\n  }\n}",
+								"variables": "{\n  \"id\": \"YOUR_EXPERIENCE_ID\",\n  \"input\": {\n    \"description\": \"Updated description of my role.\"\n  }\n}"
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4000/graphql",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"graphql"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Experience",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "YOUR_AUTH_TOKEN",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "mutation DeleteExperience($id: ID!) {\n  deleteExperience(id: $id)\n}",
+								"variables": "{\n  \"id\": \"YOUR_EXPERIENCE_ID\"\n}"
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4000/graphql",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"graphql"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Projects",
+			"item": [
+				{
+					"name": "Get Projects",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "query GetProjects {\n  projects {\n    id\n    title\n    description\n    featured\n  }\n}",
+								"variables": "{}"
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4000/graphql",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"graphql"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Project by ID",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "query GetProject($id: ID!) {\n  project(id: $id) {\n    id\n    title\n    description\n    technologies\n    link\n    github\n  }\n}",
+								"variables": "{\n  \"id\": \"YOUR_PROJECT_ID\"\n}"
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4000/graphql",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"graphql"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Project",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "YOUR_AUTH_TOKEN",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "mutation CreateProject($input: CreateProjectInput!) {\n  createProject(input: $input) {\n    id\n    title\n  }\n}",
+								"variables": "{\n  \"input\": {\n    \"title\": \"My Awesome Project\",\n    \"description\": \"This is a project that does amazing things.\",\n    \"technologies\": [\"GraphQL\", \"TypeScript\", \"Express\"],\n    \"featured\": true\n  }\n}"
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4000/graphql",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"graphql"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Project",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "YOUR_AUTH_TOKEN",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "mutation UpdateProject($id: ID!, $input: UpdateProjectInput!) {\n  updateProject(id: $id, input: $input) {\n    id\n    title\n    description\n  }\n}",
+								"variables": "{\n  \"id\": \"YOUR_PROJECT_ID\",\n  \"input\": {\n    \"description\": \"An updated description for my awesome project.\"\n  }\n}"
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4000/graphql",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"graphql"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Project",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "YOUR_AUTH_TOKEN",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "mutation DeleteProject($id: ID!) {\n  deleteProject(id: $id)\n}",
+								"variables": "{\n  \"id\": \"YOUR_PROJECT_ID\"\n}"
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4000/graphql",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"graphql"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Skills",
+			"item": [
+				{
+					"name": "Get Skills",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "query GetSkills {\n  skills {\n    id\n    name\n    level\n    category\n  }\n}",
+								"variables": "{}"
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4000/graphql",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"graphql"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Skill by ID",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "query GetSkill($id: ID!) {\n  skill(id: $id) {\n    id\n    name\n    level\n    category\n  }\n}",
+								"variables": "{\n  \"id\": \"YOUR_SKILL_ID\"\n}"
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4000/graphql",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"graphql"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Skill",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "YOUR_AUTH_TOKEN",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "mutation CreateSkill($input: CreateSkillInput!) {\n  createSkill(input: $input) {\n    id\n    name\n    level\n  }\n}",
+								"variables": "{\n  \"input\": {\n    \"name\": \"JavaScript\",\n    \"level\": 90,\n    \"category\": \"Frontend\"\n  }\n}"
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4000/graphql",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"graphql"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Skill",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "YOUR_AUTH_TOKEN",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "mutation UpdateSkill($id: ID!, $input: UpdateSkillInput!) {\n  updateSkill(id: $id, input: $input) {\n    id\n    name\n    level\n  }\n}",
+								"variables": "{\n  \"id\": \"YOUR_SKILL_ID\",\n  \"input\": {\n    \"level\": 95\n  }\n}"
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4000/graphql",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"graphql"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Skill",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "YOUR_AUTH_TOKEN",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "mutation DeleteSkill($id: ID!) {\n  deleteSkill(id: $id)\n}",
+								"variables": "{\n  \"id\": \"YOUR_SKILL_ID\"\n}"
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4000/graphql",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"graphql"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
